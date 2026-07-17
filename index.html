@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Student Survey</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="loading" class="screen">
+      <div class="spinner"></div>
+      <p>Verifying profile status...</p>
+    </div>
+
+    <!-- Duplicate Screen -->
+    <div id="duplicate-screen" class="screen hidden">
+      <div class="icon">⚠️</div>
+      <h2>Already Completed</h2>
+      <p>You have already submitted your details. Submissions are limited to once per user.</p>
+    </div>
+
+    <!-- Form Screen -->
+    <div id="form-screen" class="screen hidden">
+      <h2>Student Profile</h2>
+      <p class="subtitle">Select your gender and input your CGPA below.</p>
+      
+      <form id="survey-form">
+        <!-- Gender Select -->
+        <div class="input-group">
+          <label>Select Gender</label>
+          <div class="gender-options">
+            <button type="button" class="gender-btn" data-gender="Male">Male</button>
+            <button type="button" class="gender-btn" data-gender="Female">Female</button>
+          </div>
+        </div>
+
+        <!-- CGPA Input -->
+        <div class="input-group">
+          <label for="cgpa">CGPA (1.00 - 4.00)</label>
+          <input type="number" id="cgpa" step="0.01" min="1" max="4" placeholder="e.g. 3.75" required>
+        </div>
+
+        <button type="submit" id="submit-btn" disabled>Submit Form</button>
+      </form>
+    </div>
+
+    <!-- Success Screen -->
+    <div id="success-screen" class="screen hidden">
+      <div class="icon success">✓</div>
+      <h2>Thank You!</h2>
+      <p>Your responses have been securely logged to the Google Sheet.</p>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
