@@ -9,25 +9,25 @@
 </head>
 <body>
   <div id="app">
+    <!-- Verification Status Spinner -->
     <div id="loading" class="screen">
       <div class="spinner"></div>
       <p>Verifying profile status...</p>
     </div>
 
-    <!-- Duplicate Screen -->
+    <!-- Duplicate Guard Screen -->
     <div id="duplicate-screen" class="screen hidden">
       <div class="icon">⚠️</div>
       <h2>Already Completed</h2>
-      <p>You have already submitted your details. Submissions are limited to once per user.</p>
+      <p>You have already submitted your details. Submissions are limited to once per user account.</p>
     </div>
 
-    <!-- Form Screen -->
+    <!-- Clean Input Screen -->
     <div id="form-screen" class="screen hidden">
       <h2>Student Profile</h2>
       <p class="subtitle">Select your gender and input your CGPA below.</p>
       
       <form id="survey-form">
-        <!-- Gender Select -->
         <div class="input-group">
           <label>Select Gender</label>
           <div class="gender-options">
@@ -36,7 +36,6 @@
           </div>
         </div>
 
-        <!-- CGPA Input -->
         <div class="input-group">
           <label for="cgpa">CGPA (1.00 - 4.00)</label>
           <input type="number" id="cgpa" step="0.01" min="1" max="4" placeholder="e.g. 3.75" required>
@@ -46,7 +45,7 @@
       </form>
     </div>
 
-    <!-- Success Screen -->
+    <!-- Success Feedback Overlay -->
     <div id="success-screen" class="screen hidden">
       <div class="icon success">✓</div>
       <h2>Thank You!</h2>
