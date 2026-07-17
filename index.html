@@ -9,25 +9,13 @@
 </head>
 <body>
   <div id="app">
-    <!-- Verification Status Spinner -->
-    <div id="loading" class="screen">
-      <div class="spinner"></div>
-      <p>Verifying profile status...</p>
-    </div>
-
-    <!-- Duplicate Guard Screen -->
-    <div id="duplicate-screen" class="screen hidden">
-      <div class="icon">⚠️</div>
-      <h2>Already Completed</h2>
-      <p>You have already submitted your details. Submissions are limited to once per user account.</p>
-    </div>
-
     <!-- Clean Input Screen -->
-    <div id="form-screen" class="screen hidden">
+    <div id="form-screen" class="screen">
       <h2>Student Profile</h2>
-      <p class="subtitle">Select your gender and input your CGPA below.</p>
+      <p class="subtitle">Please complete your details down below.</p>
       
       <form id="survey-form">
+        <!-- Gender Select -->
         <div class="input-group">
           <label>Select Gender</label>
           <div class="gender-options">
@@ -36,6 +24,20 @@
           </div>
         </div>
 
+        <!-- Department Input Dropdown -->
+        <div class="input-group">
+          <label for="department">Choice of Department</label>
+          <select id="department" required>
+            <option value="" disabled selected>-- Choose your Department --</option>
+            <option value="Software Engineering">Software Engineering</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electrical Engineering">Electrical Engineering</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Mechanical Engineering">Mechanical Engineering</option>
+          </select>
+        </div>
+
+        <!-- CGPA Input -->
         <div class="input-group">
           <label for="cgpa">CGPA (1.00 - 4.00)</label>
           <input type="number" id="cgpa" step="0.01" min="1" max="4" placeholder="e.g. 3.75" required>
