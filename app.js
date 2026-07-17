@@ -2,11 +2,10 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
-// Replace with your real Google Script Web App URL from Step 1
 const API_URL = "https://script.google.com/macros/s/AKfycbz-_uPgG4EUqJwW_vHYKEHKrNdhGk3jvqv6lbqVyAqD1cpJ6jwKxEXDfGzgMstRqfvC/exec"; 
 let selectedGender = "";
 
-// Gender Button Selector
+// Gender Selector
 document.querySelectorAll('.gender-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.gender-btn').forEach(b => b.classList.remove('selected'));
@@ -16,41 +15,22 @@ document.querySelectorAll('.gender-btn').forEach(btn => {
   });
 });
 
-// CGPA Input validation trigger
+// Dropdown/Input Validation Hooks
+const departmentSelect = document.getElementById('department');
 const cgpaInput = document.getElementById('cgpa');
+
+departmentSelect.addEventListener('change', validateForm);
 cgpaInput.addEventListener('input', validateForm);
 
 function validateForm() {
   const cgpaValue = parseFloat(cgpaInput.value);
   const isValidCgpa = cgpaValue >= 1.0 && cgpaValue <= 4.0;
-  document.getElementById('submit-btn').disabled = !(selectedGender && isValidCgpa);
+  const isDeptValid = departmentSelect.value !== "";
+  
+  document.getElementById('submit-btn').disabled = !(selectedGender && isDeptValid && isValidCgpa);
 }
 
-// Check duplicate data via POST CORS bypass on launch
-window.addEventListener('DOMContentLoaded', async () => {
-  const initData = tg.initData;
-  if (!initData) {
-    document.getElementById('loading').innerHTML = "<p style='color:red;'>Please open this inside Telegram!</p>";
-    return;
-  }
-
-  try {
-    await fetch(API_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "text/plain" },
-      body: JSON.stringify({ initData: initData, checkOnly: true })
-    });
-
-    document.getElementById('loading').classList.add('hidden');
-    document.getElementById('form-screen').classList.remove('hidden');
-
-  } catch (err) {
-    document.getElementById('loading').innerHTML = "<p style='color:red;'>Network connection error.</p>";
-  }
-});
-
-// Post registration details cleanly to Sheets
+// Form Submission Posting Payload
 document.getElementById('survey-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   document.getElementById('submit-btn').disabled = true;
@@ -59,8 +39,8 @@ document.getElementById('survey-form').addEventListener('submit', async (e) => {
   const payload = {
     initData: tg.initData,
     gender: selectedGender,
-    cgpa: cgpaInput.value,
-    checkOnly: false
+    department: departmentSelect.value,
+    cgpa: cgpaInput.value
   };
 
   try {
