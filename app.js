@@ -2,6 +2,7 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
+// Replace with your real Google Script Web App URL from Step 1
 const API_URL = "https://script.google.com/macros/s/AKfycbz-_uPgG4EUqJwW_vHYKEHKrNdhGk3jvqv6lbqVyAqD1cpJ6jwKxEXDfGzgMstRqfvC/exec"; 
 let selectedGender = "";
 
@@ -15,7 +16,7 @@ document.querySelectorAll('.gender-btn').forEach(btn => {
   });
 });
 
-// CGPA Real-time Input Check
+// CGPA Input validation trigger
 const cgpaInput = document.getElementById('cgpa');
 cgpaInput.addEventListener('input', validateForm);
 
@@ -25,7 +26,7 @@ function validateForm() {
   document.getElementById('submit-btn').disabled = !(selectedGender && isValidCgpa);
 }
 
-// Check if user has already responded on app launch
+// Check duplicate data via POST CORS bypass on launch
 window.addEventListener('DOMContentLoaded', async () => {
   const initData = tg.initData;
   if (!initData) {
@@ -34,21 +35,22 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   try {
-    const res = await fetch(`${API_URL}?initData=${encodeURIComponent(initData)}`);
-    const data = await res.json();
-    
+    await fetch(API_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify({ initData: initData, checkOnly: true })
+    });
+
     document.getElementById('loading').classList.add('hidden');
-    if (data.status === "exists") {
-      document.getElementById('duplicate-screen').classList.remove('hidden');
-    } else {
-      document.getElementById('form-screen').classList.remove('hidden');
-    }
+    document.getElementById('form-screen').classList.remove('hidden');
+
   } catch (err) {
     document.getElementById('loading').innerHTML = "<p style='color:red;'>Network connection error.</p>";
   }
 });
 
-// Post submission to clean 5-column Sheets backend
+// Post registration details cleanly to Sheets
 document.getElementById('survey-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   document.getElementById('submit-btn').disabled = true;
@@ -57,7 +59,8 @@ document.getElementById('survey-form').addEventListener('submit', async (e) => {
   const payload = {
     initData: tg.initData,
     gender: selectedGender,
-    cgpa: cgpaInput.value
+    cgpa: cgpaInput.value,
+    checkOnly: false
   };
 
   try {
