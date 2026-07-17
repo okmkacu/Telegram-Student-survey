@@ -78,6 +78,10 @@ button[type="submit"]:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+.icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
 .spinner {
   border: 4px solid rgba(0,0,0,0.1);
   width: 36px;
