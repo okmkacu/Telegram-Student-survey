@@ -26,15 +26,26 @@
 
         <!-- Department Input Dropdown -->
         <div class="input-group">
-          <label for="department">Choice of Department</label>
-          <select id="department" required>
-            <option value="" disabled selected>-- Choose your Department --</option>
-            <option value="Software Engineering">Software Engineering</option>
-            <option value="Computer Science">Computer Science</option>
-            <option value="Electrical Engineering">Electrical Engineering</option>
-            <option value="Civil Engineering">Civil Engineering</option>
-            <option value="Mechanical Engineering">Mechanical Engineering</option>
-          </select>
+     <select id="department" required>
+  <option value="" disabled selected>-- Choose your Department --</option>
+  <optgroup label="College of Engineering">
+    <option value="Architecture">Architecture</option>
+    <option value="Civil Engineering">Civil Engineering</option>
+    <option value="Mining Engineering">Mining Engineering</option>
+    <option value="Chemical Engineering">Chemical Engineering</option>
+    <option value="Environmental Engineering">Environmental Engineering</option>
+    <option value="Electrical and Computer Engineering">Electrical and Computer Engineering</option>
+    <option value="Electromechanical Engineering">Electromechanical Engineering</option>
+    <option value="Mechanical Engineering">Mechanical Engineering</option>
+    <option value="Software Engineering">Software Engineering</option>
+  </optgroup>
+  <optgroup label="College of Natural and Applied Sciences">
+    <option value="Food Science and Applied Nutrition">Food Science and Applied Nutrition</option>
+    <option value="Geology">Geology</option>
+    <option value="Biotechnology">Biotechnology</option>
+    <option value="Industrial Chemistry">Industrial Chemistry</option>
+  </optgroup>
+</select>
         </div>
 
         <!-- CGPA Input -->
